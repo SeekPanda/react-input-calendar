@@ -227,12 +227,6 @@ module.exports = React.createClass({
                 {view}<span className="today-btn" onClick={this.todayClick} >Today</span>
             </div>;
 
-        var iconClass = cs({
-            'fa': true,
-            'fa-calendar': !this.state.isVisible,
-            'fa-calendar-o': this.state.isVisible
-        });
-
         return (
             <div className="input-calendar">
                 <input type="text"
@@ -240,12 +234,11 @@ module.exports = React.createClass({
                     value={this.state.inputValue}
                     onBlur={this.inputBlur}
                     onChange={this.changeDate}
-                    onClick={this.props.openOnInputFocus ? this.toggleClick : ''}
                     onFocus={this.inputFocus}
                     placeholder={this.props.placeholder} />
 
-                <span onClick={this.toggleClick} className="icon-wrapper calendar-icon">
-                    <i className={iconClass}></i>
+                <span onClick={this.inputFocus} className="icon-wrapper calendar-icon">
+                    <i className="fa fa-calendar-o"></i>
                 </span>
                 {calendar}
             </div>

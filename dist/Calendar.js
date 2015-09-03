@@ -227,12 +227,6 @@ module.exports = React.createClass({displayName: "exports",
                 view, React.createElement("span", {className: "today-btn", onClick: this.todayClick}, "Today")
             );
 
-        var iconClass = cs({
-            'fa': true,
-            'fa-calendar': !this.state.isVisible,
-            'fa-calendar-o': this.state.isVisible
-        });
-
         return (
             React.createElement("div", {className: "input-calendar"}, 
                 React.createElement("input", {type: "text", 
@@ -240,12 +234,11 @@ module.exports = React.createClass({displayName: "exports",
                     value: this.state.inputValue, 
                     onBlur: this.inputBlur, 
                     onChange: this.changeDate, 
-                    onClick: this.props.openOnInputFocus ? this.toggleClick : '', 
                     onFocus: this.inputFocus, 
                     placeholder: this.props.placeholder}), 
 
-                React.createElement("span", {onClick: this.toggleClick, className: "icon-wrapper calendar-icon"}, 
-                    React.createElement("i", {className: iconClass})
+                React.createElement("span", {onClick: this.inputFocus, className: "icon-wrapper calendar-icon"}, 
+                    React.createElement("i", {className: "fa fa-calendar-o"})
                 ), 
                 calendar
             )
