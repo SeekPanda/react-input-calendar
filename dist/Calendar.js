@@ -16,6 +16,7 @@ module.exports = React.createClass({displayName: "exports",
         date: React.PropTypes.any,
         format: React.PropTypes.string,
         minView: React.PropTypes.number,
+        onFocus: React.PropTypes.func,
         onBlur: React.PropTypes.func,
         onChange: React.PropTypes.func,
         placeholder: React.PropTypes.string
@@ -133,13 +134,19 @@ module.exports = React.createClass({displayName: "exports",
             inputValue: newDate ? newDate.format(format) : null
         });
 
-        if (this.props.onChange) {
-            this.props.onChange(computableDate);
-        }
-
         if (this.props.onBlur) {
             this.props.onBlur(e, computableDate);
         }
+    },
+
+    inputFocus: function(e) {
+        if(this.props.openOnInputFocus){
+            this.toggleClick()
+        }
+
+        if (this.props.onFocus) {
+            this.props.onFocus(e)
+        }; 
     },
 
     //small hack for hide calendar
@@ -234,7 +241,7 @@ module.exports = React.createClass({displayName: "exports",
                     onBlur: this.inputBlur, 
                     onChange: this.changeDate, 
                     onClick: this.props.openOnInputFocus ? this.toggleClick : '', 
-                    onFocus: this.props.openOnInputFocus ? this.toggleClick : '', 
+                    onFocus: this.inputFocus, 
                     placeholder: this.props.placeholder}), 
 
                 React.createElement("span", {onClick: this.toggleClick, className: "icon-wrapper calendar-icon"}, 
